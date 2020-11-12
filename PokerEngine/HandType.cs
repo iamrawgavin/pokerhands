@@ -6,7 +6,7 @@
         FourOfAKind,
         FullHouse,
         Flush,
-        Straight
+        Straight,
         ThreeOfAKind,
         TwoPair,
         Pair,
