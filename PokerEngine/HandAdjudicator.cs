@@ -26,17 +26,17 @@ namespace PokerEngine
             throw new NotImplementedException();
         }
 
-        public bool HandHasStraight(List<Card> hand)
+        public Rank GetRankOfStraight(List<Card> hand)
         {
             throw new NotImplementedException();
         }
 
-        public bool HandHasFlush(List<Card> hand)
+        public Rank GetRankOfFlush(List<Card> hand)
         {
             throw new NotImplementedException();
         }
 
-        public bool HandHasFullHouse(List<Card> hand)
+        public Rank GetRankOfFullHouseHighCard(List<Card> hand)
         {
             throw new NotImplementedException();
         }
@@ -46,7 +46,7 @@ namespace PokerEngine
             throw new NotImplementedException();
         }
 
-        public bool HandHasStraightFlush(List<Card> hand)
+        public Rank GetRankOfStraightFlush(List<Card> hand)
         {
             throw new NotImplementedException();
         }
