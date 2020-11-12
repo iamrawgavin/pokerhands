@@ -24,9 +24,9 @@ namespace PokerEngineTests
         [Fact]
         public void TenIsHighCardInFlopHand()
         {
-            Card highCard = HA.GetHighCardFromHand(FlopHand);
+            Rank highCard = HA.GetHighCardFromHand(FlopHand);
 
-            Assert.Equal(new Card(Rank.Ten, Suit.Club), highCard);
+            Assert.Equal(Rank.Ten, highCard);
         }
 
         [Fact]
