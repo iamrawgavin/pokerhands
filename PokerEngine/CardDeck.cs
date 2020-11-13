@@ -15,8 +15,8 @@ namespace PokerEngine
 
         public void MakeDeck()
         {
-            Cards = Enumerable.Range(1, 4)
-                              .SelectMany(s => Enumerable.Range(2, 14)
+            Cards = Enumerable.Range(0, 4)
+                              .SelectMany(s => Enumerable.Range(2, 13)
                                                          .Select(r => new Card((Rank)r, (Suit)s))).ToList();                                                       
         }
 
