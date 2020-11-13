@@ -20,7 +20,21 @@ namespace PokerEngine
             Deal();
             Game.PlayerOneBestHand = HandAdjudicator.GetBestHand(Game.PlayerOneCards);
             Game.PlayerTwoBestHand = HandAdjudicator.GetBestHand(Game.PlayerTwoCards);
-            Game.Winner = HandAdjudicator.GetWinningHand(Game.PlayerOneCards, Game.PlayerTwoCards) == 1 ? "Player 1" : "Player 2";
+            int gameWinnerNumber = HandAdjudicator.GetWinningHand(Game.PlayerOneCards, Game.PlayerTwoCards);
+            string gameWinnerName = string.Empty;
+            switch(gameWinnerNumber)
+            {
+                case 0:
+                    gameWinnerName = "Push";
+                    break;
+                case 1:
+                    gameWinnerName = "Player 1";
+                    break;
+                case 2:
+                    gameWinnerName = "Player 2";
+                    break;
+            }
+            Game.Winner = gameWinnerName;
             return Game;
         }
 
