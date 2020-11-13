@@ -15,7 +15,7 @@ export class Poker extends Component {
         <div>
 
         <h1>Welcome to the Poker Game</h1>
-            Winner was {this.state.pokergame.Winner}
+            Winner was...drum roll... {this.state.pokergame.Winner}
             </div>
             )
     }
