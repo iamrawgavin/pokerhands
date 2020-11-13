@@ -129,7 +129,18 @@ namespace PokerEngine
             }
             else
             {
-                return 0; //push
+                if (bestHand1.Rank > bestHand2.Rank)
+                {
+                    return 1;
+                }
+                else if (bestHand1.Rank < bestHand2.Rank)
+                {
+                    return 2;
+                }
+                else
+                {
+                    return 0;
+                }
             }
         }
 

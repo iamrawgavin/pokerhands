@@ -400,5 +400,27 @@ namespace PokerEngineTests
 
             Assert.Equal(0, indexOfWinningHand);
         }
+
+        [Fact]
+        public void TieHandShouldGoToWinningRank()
+        {
+            List<Card> hand1 = new List<Card>();
+            hand1.Add(new Card(Rank.Two, Suit.Club));
+            hand1.Add(new Card(Rank.Ten, Suit.Diamond));
+            hand1.Add(new Card(Rank.Jack, Suit.Spade));
+            hand1.Add(new Card(Rank.Five, Suit.Heart));
+            hand1.Add(new Card(Rank.Six, Suit.Club));
+
+            List<Card> hand2 = new List<Card>();
+            hand2.Add(new Card(Rank.Two, Suit.Spade));
+            hand2.Add(new Card(Rank.Ten, Suit.Club));
+            hand2.Add(new Card(Rank.Queen, Suit.Heart));
+            hand2.Add(new Card(Rank.Five, Suit.Diamond));
+            hand2.Add(new Card(Rank.Six, Suit.Spade));
+
+            int indexOfWinningHand = HA.GetWinningHand(hand1, hand2);
+
+            Assert.Equal(2, indexOfWinningHand);
+        }
     }
 }
