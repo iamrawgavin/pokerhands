@@ -188,5 +188,158 @@ namespace PokerEngineTests
         {
             Assert.Equal(Rank.Null, HA.GetRankOfStraightFlush(FlopHand));
         }
+
+        [Fact]
+        public void BestHandIsStraightFlushSixHigh()
+        {
+            List<Card> goodHand = new List<Card>();
+            goodHand.Add(new Card(Rank.Two, Suit.Club));
+            goodHand.Add(new Card(Rank.Three, Suit.Club));
+            goodHand.Add(new Card(Rank.Four, Suit.Club));
+            goodHand.Add(new Card(Rank.Five, Suit.Club));
+            goodHand.Add(new Card(Rank.Six, Suit.Club));
+
+            BestHand bestHand = HA.GetBestHand(goodHand);
+
+            Assert.Equal(HandType.StraightFlush, bestHand.Winner);
+            Assert.Equal(Rank.Six, bestHand.Rank);
+        }
+
+        [Fact]
+        public void BestHandIsFourAces()
+        {
+            List<Card> goodHand = new List<Card>();
+            goodHand.Add(new Card(Rank.Ace, Suit.Club));
+            goodHand.Add(new Card(Rank.Ace, Suit.Diamond));
+            goodHand.Add(new Card(Rank.Ace, Suit.Spade));
+            goodHand.Add(new Card(Rank.Ace, Suit.Heart));
+            goodHand.Add(new Card(Rank.Six, Suit.Club));
+
+            BestHand bestHand = HA.GetBestHand(goodHand);
+
+            Assert.Equal(HandType.FourOfAKind, bestHand.Winner);
+            Assert.Equal(Rank.Ace, bestHand.Rank);
+        }
+
+        [Fact]
+        public void BestHandIsFullHouseSixHigh()
+        {
+            List<Card> goodHand = new List<Card>();
+            goodHand.Add(new Card(Rank.Two, Suit.Club));
+            goodHand.Add(new Card(Rank.Two, Suit.Diamond));
+            goodHand.Add(new Card(Rank.Six, Suit.Spade));
+            goodHand.Add(new Card(Rank.Six, Suit.Club));
+            goodHand.Add(new Card(Rank.Six, Suit.Heart));
+
+            BestHand bestHand = HA.GetBestHand(goodHand);
+
+            Assert.Equal(HandType.FullHouse, bestHand.Winner);
+            Assert.Equal(Rank.Six, bestHand.Rank);
+        }
+
+        [Fact]
+        public void BestHandIsFlushSevenHigh()
+        {
+            List<Card> goodHand = new List<Card>();
+            goodHand.Add(new Card(Rank.Two, Suit.Club));
+            goodHand.Add(new Card(Rank.Three, Suit.Club));
+            goodHand.Add(new Card(Rank.Four, Suit.Club));
+            goodHand.Add(new Card(Rank.Five, Suit.Club));
+            goodHand.Add(new Card(Rank.Seven, Suit.Club));
+
+            BestHand bestHand = HA.GetBestHand(goodHand);
+
+            Assert.Equal(HandType.Flush, bestHand.Winner);
+            Assert.Equal(Rank.Seven, bestHand.Rank);
+        }
+
+        [Fact]
+        public void BestHandIsStraightQueenHigh()
+        {
+            List<Card> goodHand = new List<Card>();
+            goodHand.Add(new Card(Rank.Jack, Suit.Club));
+            goodHand.Add(new Card(Rank.Ten, Suit.Heart));
+            goodHand.Add(new Card(Rank.Eight, Suit.Club));
+            goodHand.Add(new Card(Rank.Nine, Suit.Diamond));
+            goodHand.Add(new Card(Rank.Queen, Suit.Club));
+
+            BestHand bestHand = HA.GetBestHand(goodHand);
+
+            Assert.Equal(HandType.Straight, bestHand.Winner);
+            Assert.Equal(Rank.Queen, bestHand.Rank);
+        }
+
+        [Fact]
+        public void BestHandIsThreeSixes()
+        {
+            List<Card> goodHand = new List<Card>();
+            goodHand.Add(new Card(Rank.Two, Suit.Diamond));
+            goodHand.Add(new Card(Rank.Three, Suit.Club));
+            goodHand.Add(new Card(Rank.Six, Suit.Heart));
+            goodHand.Add(new Card(Rank.Six, Suit.Spade));
+            goodHand.Add(new Card(Rank.Six, Suit.Club));
+
+            BestHand bestHand = HA.GetBestHand(goodHand);
+
+            Assert.Equal(HandType.ThreeOfAKind, bestHand.Winner);
+            Assert.Equal(Rank.Six, bestHand.Rank);
+        }
+
+        [Fact]
+        public void BestHandIsTwoPairKingHigh()
+        {
+            List<Card> goodHand = new List<Card>();
+            goodHand.Add(new Card(Rank.Two, Suit.Diamond));
+            goodHand.Add(new Card(Rank.King, Suit.Club));
+            goodHand.Add(new Card(Rank.King, Suit.Spade));
+            goodHand.Add(new Card(Rank.Six, Suit.Club));
+            goodHand.Add(new Card(Rank.Six, Suit.Heart));
+
+            BestHand bestHand = HA.GetBestHand(goodHand);
+
+            Assert.Equal(HandType.TwoPair, bestHand.Winner);
+            Assert.Equal(Rank.King, bestHand.Rank);
+        }
+
+        [Fact]
+        public void BestHandIsPairOfTens()
+        {
+            List<Card> goodHand = new List<Card>();
+            goodHand.Add(new Card(Rank.Two, Suit.Club));
+            goodHand.Add(new Card(Rank.Ten, Suit.Diamond));
+            goodHand.Add(new Card(Rank.Ten, Suit.Spade));
+            goodHand.Add(new Card(Rank.Five, Suit.Heart));
+            goodHand.Add(new Card(Rank.Six, Suit.Club));
+
+            BestHand bestHand = HA.GetBestHand(goodHand);
+
+            Assert.Equal(HandType.Pair, bestHand.Winner);
+            Assert.Equal(Rank.Ten, bestHand.Rank);
+        }
+
+        [Fact]
+        public void BestHandIsHighCardSeven()
+        {
+            List<Card> goodHand = new List<Card>();
+            goodHand.Add(new Card(Rank.Two, Suit.Club));
+            goodHand.Add(new Card(Rank.Three, Suit.Diamond));
+            goodHand.Add(new Card(Rank.Four, Suit.Club));
+            goodHand.Add(new Card(Rank.Five, Suit.Spade));
+            goodHand.Add(new Card(Rank.Seven, Suit.Heart));
+
+            BestHand bestHand = HA.GetBestHand(goodHand);
+
+            Assert.Equal(HandType.HighCard, bestHand.Winner);
+            Assert.Equal(Rank.Seven, bestHand.Rank);
+        }
+
+        [Fact]
+        public void FlopHandBestHandIsHighCardTen()
+        {
+            BestHand bestHand = HA.GetBestHand(FlopHand);
+
+            Assert.Equal(HandType.HighCard, bestHand.Winner);
+            Assert.Equal(Rank.Ten, bestHand.Rank);
+        }
     }
 }

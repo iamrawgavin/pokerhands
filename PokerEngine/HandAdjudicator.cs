@@ -28,10 +28,14 @@ namespace PokerEngine
 
         public Rank GetRankOfStraight(List<Card> hand)
         {
+            var groupedHand = hand.GroupBy(c => c.Rank)
+                      .Select(c => new { Rank = c.Key, Count = c.Count() })
+                      .Where(c => c.Count > 1);
+
             var sortedHand = hand.OrderByDescending(c => c.Rank);
             int spread = sortedHand.First().Rank - sortedHand.Last().Rank;
 
-            if (spread == 4) return sortedHand.First().Rank;
+            if (spread == 4 && groupedHand.Count() == 0) return sortedHand.First().Rank;
             else return Rank.Null;
         }
 
@@ -66,6 +70,48 @@ namespace PokerEngine
 
             Rank flushRank = GetRankOfFlush(hand);
             return flushRank; //it will be either the high card or null
+        }
+
+        public BestHand GetBestHand(List<Card> hand)
+        {
+            Rank rankOfWinner;
+            if ((rankOfWinner = GetRankOfStraightFlush(hand)) != Rank.Null)
+            {
+                return new BestHand(HandType.StraightFlush, rankOfWinner);
+            }
+            else if ((rankOfWinner = GetRankOfFourOfAKind(hand)) != Rank.Null)
+            {
+                return new BestHand(HandType.FourOfAKind, rankOfWinner);
+            }
+            else if ((rankOfWinner = GetRankOfFullHouseHighCard(hand)) != Rank.Null)
+            {
+                return new BestHand(HandType.FullHouse, rankOfWinner);
+            }
+            else if ((rankOfWinner = GetRankOfFlush(hand)) != Rank.Null)
+            {
+                return new BestHand(HandType.Flush, rankOfWinner);
+            }
+            else if ((rankOfWinner = GetRankOfStraight(hand)) != Rank.Null)
+            {
+                return new BestHand(HandType.Straight, rankOfWinner);
+            }
+            else if ((rankOfWinner = GetRankOfThreeOfAKind(hand)) != Rank.Null)
+            {
+                return new BestHand(HandType.ThreeOfAKind, rankOfWinner);
+            }
+            else if ((rankOfWinner = GetHighRankOfTwoPair(hand)) != Rank.Null)
+            {
+                return new BestHand(HandType.TwoPair, rankOfWinner);
+            }
+            else if ((rankOfWinner = GetRankOfPair(hand)) != Rank.Null)
+            {
+                return new BestHand(HandType.Pair, rankOfWinner);
+            }
+            else
+            {
+                rankOfWinner = GetHighCardFromHand(hand);
+                return new BestHand(HandType.HighCard, rankOfWinner);
+            }
         }
 
         private Rank FindMatches(List<Card> hand, int countToMatch, int setsOfMatches)
