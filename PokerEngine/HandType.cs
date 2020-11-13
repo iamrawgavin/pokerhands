@@ -2,14 +2,14 @@
 {
     public enum HandType
     {
-        StraightFlush,
-        FourOfAKind,
-        FullHouse,
-        Flush,
-        Straight,
-        ThreeOfAKind,
-        TwoPair,
+        HighCard,
         Pair,
-        HighCard
+        TwoPair,
+        ThreeOfAKind,
+        Straight,
+        Flush,
+        FullHouse,
+        FourOfAKind,
+        StraightFlush
     }
 }

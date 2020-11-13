@@ -114,6 +114,25 @@ namespace PokerEngine
             }
         }
 
+        public int GetWinningHand(List<Card> hand1, List<Card> hand2)
+        {
+            BestHand bestHand1 = GetBestHand(hand1);
+            BestHand bestHand2 = GetBestHand(hand2);
+
+            if (bestHand1.Winner > bestHand2.Winner)
+            {
+                return 1;
+            }
+            else if (bestHand1.Winner < bestHand2.Winner)
+            {
+                return 2;
+            }
+            else
+            {
+                return 0; //push
+            }
+        }
+
         private Rank FindMatches(List<Card> hand, int countToMatch, int setsOfMatches)
         {
             var matches = hand.GroupBy(c => c.Rank)

@@ -341,5 +341,64 @@ namespace PokerEngineTests
             Assert.Equal(HandType.HighCard, bestHand.Winner);
             Assert.Equal(Rank.Ten, bestHand.Rank);
         }
+
+        [Fact]
+        public void PairBeatsTenHigh()
+        {
+            List<Card> hand = new List<Card>();
+            hand.Add(new Card(Rank.Two, Suit.Club));
+            hand.Add(new Card(Rank.Ten, Suit.Diamond));
+            hand.Add(new Card(Rank.Ten, Suit.Spade));
+            hand.Add(new Card(Rank.Five, Suit.Heart));
+            hand.Add(new Card(Rank.Six, Suit.Club));
+
+            int indexOfWinningHand = HA.GetWinningHand(hand, FlopHand);
+
+            Assert.Equal(1, indexOfWinningHand);
+        }
+
+        [Fact]
+        public void StraightBeatsPair()
+        {
+            List<Card> straightHand = new List<Card>();
+            straightHand.Add(new Card(Rank.Two, Suit.Club));
+            straightHand.Add(new Card(Rank.Three, Suit.Diamond));
+            straightHand.Add(new Card(Rank.Four, Suit.Spade));
+            straightHand.Add(new Card(Rank.Five, Suit.Heart));
+            straightHand.Add(new Card(Rank.Six, Suit.Club));
+
+            List<Card> pairHand = new List<Card>();
+            pairHand.Add(new Card(Rank.Two, Suit.Club));
+            pairHand.Add(new Card(Rank.Three, Suit.Diamond));
+            pairHand.Add(new Card(Rank.Four, Suit.Spade));
+            pairHand.Add(new Card(Rank.Two, Suit.Heart));
+            pairHand.Add(new Card(Rank.Six, Suit.Club));
+
+            int indexOfWinningHand = HA.GetWinningHand(pairHand, straightHand);
+
+            Assert.Equal(2, indexOfWinningHand);
+        }
+
+        [Fact]
+        public void PairOfTensPushPairOfTens()
+        {
+            List<Card> hand1 = new List<Card>();
+            hand1.Add(new Card(Rank.Two, Suit.Club));
+            hand1.Add(new Card(Rank.Ten, Suit.Diamond));
+            hand1.Add(new Card(Rank.Ten, Suit.Spade));
+            hand1.Add(new Card(Rank.Five, Suit.Heart));
+            hand1.Add(new Card(Rank.Six, Suit.Club));
+
+            List<Card> hand2 = new List<Card>();
+            hand2.Add(new Card(Rank.Two, Suit.Spade));
+            hand2.Add(new Card(Rank.Ten, Suit.Club));
+            hand2.Add(new Card(Rank.Ten, Suit.Heart));
+            hand2.Add(new Card(Rank.Five, Suit.Diamond));
+            hand2.Add(new Card(Rank.Six, Suit.Spade));
+
+            int indexOfWinningHand = HA.GetWinningHand(hand1, hand2);
+
+            Assert.Equal(0, indexOfWinningHand);
+        }
     }
 }
